@@ -1,4 +1,4 @@
-# Go Admin
+# GetJob
 [![Build](https://github.com/quangdangfit/getjob/workflows/master/badge.svg)](https://github.com/quangdangfit/getjob/actions)
 
 Backend service for resource human system based on Golang, Postgresql
@@ -21,7 +21,7 @@ Simply run `make startup`, or run following commands step - by - step:
 database:
   host: localhost
   port: 5432
-  name: github.com/quangdangfit/go-admin
+  name: getjob
   env: development
   user: postgres
   password: 1234
