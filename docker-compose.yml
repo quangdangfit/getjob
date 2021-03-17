@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  getjob:
+    build: .
+    image: "github.com/quangdangfit/getjob"
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE__HOST: "postgres"
+    depends_on:
+      - postgres
+      - redis
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    volumes:
+      - "/.storage/redis_data:/data"
+
+  postgres:
+    restart: always
+    image: "postgres:latest"
+    environment:
+      DATABASE_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./scripts/init.d:/docker-entrypoint-initdb.d"
+      - "/.storage/postgres-data:/var/lib/postgresql/data"
