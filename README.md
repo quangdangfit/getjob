@@ -70,7 +70,6 @@ $ go run main.go
 │   ├── schema          # Schemas
 │   ├── services        # Business Logic Layer
 │   │   └── impl            # Implement services
-│   └── test            # Test
 ├── cmd                 # Contains commands 
 ├── config              # Config files 
 ├── docs                # Swagger API document
@@ -81,4 +80,5 @@ $ go run main.go
 │   ├── jwt                 # JWT packages
 │   └── utils               # Utils packages
 ├── scripts             # Scripts
+├── test                # Test package
 ```
