@@ -49,7 +49,6 @@ jobs:
 
       - name: Go Test
         run: |
-          make startup
           git config --global url.ssh://git@github.com/.insteadOf https://github.com/
           go mod vendor
           go test -timeout 9000s -cover -a -v ./test
