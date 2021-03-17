@@ -10,7 +10,7 @@ import (
 //https://hackernoon.com/golang-handling-errors-gracefully-8e27f1db729f
 
 type CustomError struct {
-	errType      ErrorType
+	code         ErrorCode
 	wrappedError error
 	context      errorContext
 }
@@ -24,13 +24,13 @@ func (err CustomError) Stacktrace() string {
 }
 
 // New creates a no type error
-func New(msg string) error {
-	return CustomError{errType: Error, wrappedError: errors.New(msg)}
+func New(errCode ErrorCode, msg string) error {
+	return CustomError{code: errCode, wrappedError: errors.New(msg)}
 }
 
 // Newf creates a no type error with formatted message
-func Newf(msg string, args ...interface{}) error {
-	return CustomError{errType: Error, wrappedError: errors.New(fmt.Sprintf(msg, args...))}
+func Newf(errCode ErrorCode, msg string, args ...interface{}) error {
+	return CustomError{code: errCode, wrappedError: errors.New(fmt.Sprintf(msg, args...))}
 }
 
 // Wrap wrans an error with a string
@@ -48,13 +48,13 @@ func Wrapf(err error, msg string, args ...interface{}) error {
 	wrappedError := errors.Wrapf(err, msg, args...)
 	if customErr, ok := err.(CustomError); ok {
 		return CustomError{
-			errType:      customErr.errType,
+			code:         customErr.code,
 			wrappedError: wrappedError,
 			context:      customErr.context,
 		}
 	}
 
-	return CustomError{errType: Error, wrappedError: wrappedError}
+	return CustomError{code: ECUnknown, wrappedError: wrappedError}
 }
 
 // Get Stacktrace of error
