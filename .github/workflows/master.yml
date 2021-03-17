@@ -1,0 +1,83 @@
+name: master
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      GIN_MODE: release
+      DATABASE__HOST: 127.0.0.1
+      DATABASE__NAME: goadmin
+      DATABASE__PORT: 5432
+      DATABASE__ENV: native
+      DATABASE__USER: postgres
+      DATABASE__PASSWORD: 1234
+      DATABASE__SSLMODE: disable
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: goadmin
+          POSTGRES_PASSWORD: 1234
+        ports:
+          - 5432:5432
+
+      redis:
+        image: redis:alpine
+        ports:
+          - 6379:6379
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.15
+
+      - name: Setup SSH Keys and known_hosts
+        uses: webfactory/ssh-agent@v0.4.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Go Test
+        run: |
+          make startup
+          git config --global url.ssh://git@github.com/.insteadOf https://github.com/
+          go mod vendor
+          go test -timeout 9000s -cover -a -v ./test
+
+#  deploy:
+#    needs: [ test ]
+#    runs-on: ubuntu-latest
+#
+#    env:
+#      GIN_MODE: release
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Set up Go
+#        uses: actions/setup-go@v2
+#        with:
+#          go-version: 1.15
+#
+#      - name: Deploy to Server
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.REMOTE_HOST }}
+#          username: ${{ secrets.REMOTE_USER }}
+#          key: ${{ secrets.SSH_PRIVATE_KEY }}
+#          script: |
+#            cd ${{ secrets.REMOTE_TARGET }}
+#            git pull
+#            git config --global url.ssh://git@github.com/.insteadOf https://github.com/
+#            go mod vendor
+#            docker-compose up -d --build
