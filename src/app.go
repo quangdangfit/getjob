@@ -44,6 +44,11 @@ func BuildContainer() *dig.Container {
 
 func InitGinEngine(container *dig.Container) *gin.Engine {
 	app := gin.New()
-	router.RegisterAPI(app, container)
+	err := router.RegisterAPI(app, container)
+	if err != nil {
+		logger.Fatalf("Cannot init Gin Engine: %s", err)
+		return nil
+	}
+
 	return app
 }
