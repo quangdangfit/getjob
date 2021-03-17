@@ -1,0 +1,29 @@
+env: production
+default_limit: 25
+max_limit: 100
+
+database:
+  host: localhost
+  port: 5432
+  name: database
+  env: native
+  user: ######
+  password: ######
+  sslmode: disable
+
+redis:
+  enable: true
+  host: localhost
+  port:
+  password:
+  database: 0
+
+cache:
+  enable: true
+  expiry_time: 3600
+
+jwt_auth:
+  signing_key: access
+  expired: 900
+  signing_refresh_key: refresh
+  expired_refresh_token: 1
