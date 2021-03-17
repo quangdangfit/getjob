@@ -13,7 +13,7 @@ jobs:
     env:
       GIN_MODE: release
       DATABASE__HOST: 127.0.0.1
-      DATABASE__NAME: goadmin
+      DATABASE__NAME: getjob
       DATABASE__PORT: 5432
       DATABASE__ENV: native
       DATABASE__USER: postgres
@@ -24,7 +24,7 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: goadmin
+          POSTGRES_DB: getjob
           POSTGRES_PASSWORD: 1234
         ports:
           - 5432:5432
