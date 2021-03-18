@@ -8,8 +8,9 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/quangdangfit/gocommon/logger"
+
 	"github.com/quangdangfit/getjob/config"
-	"github.com/quangdangfit/getjob/pkg/logger"
 	"github.com/quangdangfit/getjob/src"
 )
 

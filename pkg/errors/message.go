@@ -40,7 +40,7 @@ var MsgMap = map[ErrorCode]string{
 	ECUploadFileFail:      "upload file is fail",
 	ECMarshal:             "marshal fail",
 	ECUnmarshal:           "unmarshal fail",
-	ECInvalidDateTime:     "DateTime is invalid",
+	ECInvalidDateTime:     "datetime is invalid",
 
 	ECMongoConnection:         "mongodb connection error",
 	ECMongoCreate:             "mongodb create model error",

@@ -4,7 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/dig"
 
-	"github.com/quangdangfit/getjob/pkg/logger"
+	"github.com/quangdangfit/gocommon/logger"
+
 	"github.com/quangdangfit/getjob/src/api"
 )
 
