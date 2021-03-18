@@ -3,8 +3,9 @@ package utils
 import (
 	"golang.org/x/crypto/bcrypt"
 
+	"github.com/quangdangfit/gocommon/logger"
+
 	"github.com/quangdangfit/getjob/pkg/errors"
-	"github.com/quangdangfit/getjob/pkg/logger"
 )
 
 // HashPassword
