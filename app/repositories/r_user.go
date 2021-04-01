@@ -1,13 +1,30 @@
 package repositories
 
-import "github.com/quangdangfit/getjob/app/interfaces"
+import (
+	"context"
 
-type CandidateRepository struct {
+	"github.com/quangdangfit/getjob/app/interfaces"
+	"github.com/quangdangfit/getjob/app/models"
+)
+
+type UserRepository struct {
 	db interfaces.IDatabase
 }
 
-func NewCandidateRepository(db interfaces.IDatabase) interfaces.ICandidateRepository {
-	return &CandidateRepository{
+func NewUserRepository(db interfaces.IDatabase) interfaces.IUserRepository {
+	return &UserRepository{
 		db: db,
 	}
+}
+
+func (r *UserRepository) GetByID(ctx context.Context, id string) (*models.User, error) {
+	return nil, nil
+}
+
+func (r *UserRepository) GetByUsername(ctx context.Context, username string) (*models.User, error) {
+	return nil, nil
+}
+
+func (r *UserRepository) GetByEmail(ctx context.Context, email string) (*models.User, error) {
+	return nil, nil
 }

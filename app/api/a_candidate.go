@@ -5,10 +5,10 @@ import (
 )
 
 type CandidateAPI struct {
-	service interfaces.ICandidateService
+	service interfaces.IUserService
 }
 
-func NewCandidateAPI(service interfaces.ICandidateService) *CandidateAPI {
+func NewCandidateAPI(service interfaces.IUserService) *CandidateAPI {
 	return &CandidateAPI{
 		service: service,
 	}

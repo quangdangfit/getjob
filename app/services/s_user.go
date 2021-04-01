@@ -2,12 +2,12 @@ package services
 
 import "github.com/quangdangfit/getjob/app/interfaces"
 
-type CandidateService struct {
-	repo interfaces.ICandidateRepository
+type UserService struct {
+	repo interfaces.IUserRepository
 }
 
-func NewCandidateService(repo interfaces.ICandidateRepository) interfaces.ICandidateService {
-	return &CandidateService{
+func NewUserService(repo interfaces.IUserRepository) interfaces.IUserService {
+	return &UserService{
 		repo: repo,
 	}
 }
