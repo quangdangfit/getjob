@@ -6,7 +6,7 @@ import (
 
 	"github.com/quangdangfit/gocommon/logger"
 
-	"github.com/quangdangfit/getjob/src/api"
+	"github.com/quangdangfit/getjob/app/api"
 )
 
 func RegisterAPI(r *gin.Engine, container *dig.Container) error {

@@ -7,8 +7,8 @@ import (
 
 	"github.com/quangdangfit/gocommon/logger"
 
+	"github.com/quangdangfit/getjob/app/interfaces"
 	"github.com/quangdangfit/getjob/config"
-	"github.com/quangdangfit/getjob/src/interfaces"
 )
 
 type database struct {

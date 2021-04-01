@@ -8,10 +8,12 @@ import (
 	"syscall"
 	"time"
 
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+	_ "github.com/lib/pq"
 	"github.com/quangdangfit/gocommon/logger"
 
+	"github.com/quangdangfit/getjob/app"
 	"github.com/quangdangfit/getjob/config"
-	"github.com/quangdangfit/getjob/src"
 )
 
 // @title Go Admin API Documents
@@ -28,8 +30,8 @@ import (
 
 func main() {
 	logger.Initialize(config.Config.Env)
-	container := src.BuildContainer()
-	engine := src.InitGinEngine(container)
+	container := app.BuildContainer()
+	engine := app.InitGinEngine(container)
 
 	server := &http.Server{
 		Addr:    ":8080",

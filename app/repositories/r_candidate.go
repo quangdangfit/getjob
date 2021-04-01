@@ -1,6 +1,6 @@
 package repositories
 
-import "github.com/quangdangfit/getjob/src/interfaces"
+import "github.com/quangdangfit/getjob/app/interfaces"
 
 type CandidateRepository struct {
 	db interfaces.IDatabase

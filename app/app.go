@@ -1,4 +1,4 @@
-package src
+package app
 
 import (
 	"github.com/gin-gonic/gin"
@@ -6,11 +6,11 @@ import (
 
 	"github.com/quangdangfit/gocommon/logger"
 
-	"github.com/quangdangfit/getjob/src/api"
-	"github.com/quangdangfit/getjob/src/dbs"
-	"github.com/quangdangfit/getjob/src/repositories"
-	"github.com/quangdangfit/getjob/src/router"
-	"github.com/quangdangfit/getjob/src/services"
+	"github.com/quangdangfit/getjob/app/api"
+	"github.com/quangdangfit/getjob/app/dbs"
+	"github.com/quangdangfit/getjob/app/repositories"
+	"github.com/quangdangfit/getjob/app/router"
+	"github.com/quangdangfit/getjob/app/services"
 )
 
 func BuildContainer() *dig.Container {

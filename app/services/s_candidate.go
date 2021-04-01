@@ -1,6 +1,6 @@
 package services
 
-import "github.com/quangdangfit/getjob/src/interfaces"
+import "github.com/quangdangfit/getjob/app/interfaces"
 
 type CandidateService struct {
 	repo interfaces.ICandidateRepository

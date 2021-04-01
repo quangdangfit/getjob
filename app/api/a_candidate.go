@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/quangdangfit/getjob/src/interfaces"
+	"github.com/quangdangfit/getjob/app/interfaces"
 )
 
 type CandidateAPI struct {
