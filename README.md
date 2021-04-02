@@ -1,7 +1,7 @@
 # GetJob
 [![Build](https://github.com/quangdangfit/getjob/workflows/master/badge.svg)](https://github.com/quangdangfit/getjob/actions)
 
-Backend service for resource human system based on Golang, Postgresql
+Backend service for *Human Resources System* based on Golang, Mysql
 
 ## How to run
 
@@ -22,10 +22,8 @@ database:
   host: localhost
   port: 5432
   name: getjob
-  env: development
-  user: postgres
+  user: mysql
   password: 1234
-  sslmode: disable
 
 redis:
   enable: true

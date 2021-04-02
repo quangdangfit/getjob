@@ -18,8 +18,6 @@ type Schema struct {
 		Name     string `mapstructure:"name"`
 		User     string `mapstructure:"user"`
 		Password string `mapstructure:"password"`
-		Env      string `mapstructure:"env"`
-		SSLMode  string `mapstructure:"sslmode"`
 	} `mapstructure:"database"`
 
 	Redis struct {

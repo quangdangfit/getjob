@@ -4,9 +4,8 @@ max_limit: 100
 
 database:
   host: localhost
-  port: 5432
+  port: 3306
   name: database
-  env: native
   user: ######
   password: ######
 
