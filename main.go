@@ -8,11 +8,11 @@ import (
 	"syscall"
 	"time"
 
-	_ "github.com/jinzhu/gorm/dialects/postgres"
-	_ "github.com/lib/pq"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/quangdangfit/gocommon/logger"
 
 	"github.com/quangdangfit/getjob/app"
+	"github.com/quangdangfit/getjob/app/migration"
 	"github.com/quangdangfit/getjob/config"
 )
 
@@ -32,6 +32,11 @@ func main() {
 	logger.Initialize(config.Config.Env)
 	container := app.BuildContainer()
 	engine := app.InitGinEngine(container)
+
+	err := migration.Migrate(container)
+	if err != nil {
+		logger.Errorf("Migrate fail: %s", err)
+	}
 
 	server := &http.Server{
 		Addr:    ":8080",

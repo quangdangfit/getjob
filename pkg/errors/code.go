@@ -105,6 +105,9 @@ const (
 
 	// ECInvalidDateTime : DateTime is invalid
 	ECInvalidDateTime
+
+	// ECHashPasswordFail : DateTime is invalid
+	ECHashPasswordFail
 )
 
 // third - party errors

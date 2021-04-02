@@ -5,6 +5,6 @@ import (
 )
 
 func Inject(container *dig.Container) error {
-	_ = container.Provide(NewCandidateService)
+	_ = container.Provide(NewUserService)
 	return nil
 }

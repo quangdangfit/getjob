@@ -37,7 +37,7 @@ func GetErrorContext(err error) map[string]string {
 	return nil
 }
 
-// GetType returns the error type
+// GetCode returns the error type
 func GetCode(err error) ErrorCode {
 	if customErr, ok := err.(CustomError); ok {
 		return customErr.code

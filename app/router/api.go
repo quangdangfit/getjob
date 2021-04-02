@@ -7,17 +7,17 @@ import (
 	"github.com/quangdangfit/gocommon/logger"
 
 	"github.com/quangdangfit/getjob/app/api"
+	"github.com/quangdangfit/getjob/pkg/http/wrapper"
 )
 
 func RegisterAPI(r *gin.Engine, container *dig.Container) error {
 	err := container.Invoke(func(
-		candidate *api.CandidateAPI,
+		userAPI *api.UserAPI,
 	) error {
 		//--------------------------------API-----------------------------------
-		//apiRoute := r.Group("/api/v1")
+		apiRoute := r.Group("/api/v1")
 		{
-			//apiRoute.GET("/users/:id", user.GetByID)
-			//apiRoute.GET("/users", wrapper.Wrap(user.List))
+			apiRoute.POST("/register", wrapper.Wrap(userAPI.Register))
 		}
 		return nil
 	})
