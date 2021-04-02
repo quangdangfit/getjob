@@ -5,6 +5,7 @@ import (
 
 	"github.com/quangdangfit/getjob/app/interfaces"
 	"github.com/quangdangfit/getjob/app/models"
+	"github.com/quangdangfit/getjob/pkg/errors"
 )
 
 type CompanyRepository struct {
@@ -25,6 +26,9 @@ func (r *CompanyRepository) GetByEmail(ctx context.Context, email string) (*mode
 	return nil, nil
 }
 
-func (r *CompanyRepository) Create(ctx context.Context, user *models.Company) error {
+func (r *CompanyRepository) Create(ctx context.Context, company *models.Company) error {
+	if err := r.db.GetInstance().Create(&company).Error; err != nil {
+		return errors.New(errors.MysqlCreate, err.Error())
+	}
 	return nil
 }

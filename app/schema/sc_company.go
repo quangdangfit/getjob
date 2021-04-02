@@ -16,3 +16,17 @@ type Company struct {
 	UpdatedAt          time.Time  `json:"updated_at"`
 	DeletedAt          *time.Time `json:"deleted_at"`
 }
+
+// Request
+// =============================================================================
+
+// CompanyCreateParams schema
+type CompanyCreateParams struct {
+	Email              string `json:"email" validate:"required"`
+	Fields             string `json:"fields" validate:"required"`
+	LogoURL            string `json:"logo_url"`
+	BackgroundPhotoURL string `json:"background_photo_url"`
+	CountryID          string `json:"country_id"`
+	CityID             string `json:"city_id"`
+	Description        string `json:"description"`
+}
