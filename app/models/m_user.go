@@ -2,11 +2,14 @@ package models
 
 import (
 	"github.com/jinzhu/gorm"
+
+	"github.com/quangdangfit/getjob/app/schema"
+	"github.com/quangdangfit/getjob/pkg/errors"
+	"github.com/quangdangfit/getjob/pkg/utils"
 )
 
 type User struct {
-	Model              `json:"inline"`
-	Username           string `json:"username" gorm:"unique;not null;index"`
+	Model              `json:",inline"`
 	Email              string `json:"email" gorm:"unique;not null;index"`
 	Password           string `json:"password" gorm:"not null;index"`
 	Title              string `json:"title"`
@@ -21,17 +24,27 @@ type User struct {
 	Description        string `json:"description"`
 }
 
-func (u *User) BeforeCreate(scope *gorm.Scope) error {
-	//err := u.Model.BeforeCreate(scope)
-	//if err != nil {
-	//	return err
-	//}
-	//
-	//hashedPassword, err := utils.HashPassword([]byte(u.Password))
-	//if err != nil {
-	//	return errors.Wrap(err, "User.BeforeCreate")
-	//}
-	//u.Password = hashedPassword
-	//
+func (m *User) BeforeCreate(scope *gorm.Scope) error {
+	err := m.Model.BeforeCreate(scope)
+	if err != nil {
+		return err
+	}
+
+	hashedPassword, err := utils.HashPassword([]byte(m.Password))
+	if err != nil {
+		return errors.New(errors.ECHashPasswordFail, err.Error())
+	}
+	m.Password = hashedPassword
+
 	return nil
+}
+
+func (m *User) ToSchema() *schema.User {
+	var scUser *schema.User
+	err := utils.Copy(&scUser, &m)
+	if err != nil {
+		return nil
+	}
+
+	return scUser
 }

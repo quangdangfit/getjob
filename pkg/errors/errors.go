@@ -23,6 +23,10 @@ func (err CustomError) Stacktrace() string {
 	return fmt.Sprintf("%+v\n", err.wrappedError)
 }
 
+func (err CustomError) GetErrorCode() ErrorCode {
+	return err.code
+}
+
 // New creates a no type error
 func New(errCode ErrorCode, msg string) error {
 	return CustomError{code: errCode, wrappedError: errors.New(msg)}

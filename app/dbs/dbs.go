@@ -17,12 +17,11 @@ type database struct {
 
 func NewDatabase() interfaces.IDatabase {
 	dbConfig := config.Config.Database
-	connectionPath := fmt.Sprintf("host=%s port=%d user=%s dbname=%s password=%s sslmode=%s",
-		dbConfig.Host, dbConfig.Port, dbConfig.User, dbConfig.Name, dbConfig.Password, dbConfig.SSLMode)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+		dbConfig.User, dbConfig.Password, dbConfig.Host, dbConfig.Port, dbConfig.Name)
 
-	logger.Info(connectionPath)
-
-	db, err := gorm.Open("postgres", connectionPath)
+	logger.Info(dsn)
+	db, err := gorm.Open("mysql", dsn)
 	if err != nil {
 		logger.Fatal("Cannot connect to database: ", err)
 	}
