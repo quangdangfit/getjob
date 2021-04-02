@@ -25,24 +25,24 @@ type User struct {
 	Description        string `json:"description"`
 }
 
-func (m *User) BeforeCreate(scope *gorm.Scope) error {
-	err := m.Model.BeforeCreate(scope)
+func (u *User) BeforeCreate(scope *gorm.Scope) error {
+	err := u.Model.BeforeCreate(scope)
 	if err != nil {
 		return err
 	}
 
-	hashedPassword, err := utils.HashPassword([]byte(m.Password))
+	hashedPassword, err := utils.HashPassword([]byte(u.Password))
 	if err != nil {
 		return errors.New(errors.HashPasswordFail, err.Error())
 	}
-	m.Password = hashedPassword
+	u.Password = hashedPassword
 
 	return nil
 }
 
-func (m *User) ToSchema() *schema.User {
+func (u *User) ToSchema() *schema.User {
 	var scUser *schema.User
-	err := utils.Copy(&scUser, &m)
+	err := utils.Copy(&scUser, &u)
 	if err != nil {
 		return nil
 	}
@@ -50,8 +50,8 @@ func (m *User) ToSchema() *schema.User {
 	return scUser
 }
 
-func (m *User) CheckPassword(password string) (bool, error) {
-	err := bcrypt.CompareHashAndPassword([]byte(m.Password), []byte(password))
+func (u *User) CheckPassword(password string) (bool, error) {
+	err := bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(password))
 	if err != nil {
 		return false, errors.New(errors.InvalidPassword, err.Error())
 	}
