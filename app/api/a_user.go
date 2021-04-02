@@ -34,12 +34,12 @@ func (a *UserAPI) Login(c *gin.Context) wrapper.Response {
 	var params *schema.UserLoginParams
 	if err := c.ShouldBindJSON(&params); err != nil {
 		logger.Error(err.Error())
-		return wrapper.Res(http.StatusBadRequest, errors.New(errors.ECInvalidArgument, err.Error()), nil)
+		return wrapper.Res(http.StatusBadRequest, errors.New(errors.InvalidArgument, err.Error()), nil)
 	}
 
 	validator := validation.New()
 	if err := validator.ValidateStruct(params); err != nil {
-		return wrapper.Res(http.StatusBadRequest, errors.New(errors.ECInvalidArgument, err.Error()), nil)
+		return wrapper.Res(http.StatusBadRequest, errors.New(errors.InvalidArgument, err.Error()), nil)
 	}
 
 	ctx := c.Request.Context()
@@ -54,7 +54,7 @@ func (a *UserAPI) Login(c *gin.Context) wrapper.Response {
 		Token:       token,
 		ExpiredTime: expiredTime.Format(time.RFC3339Nano),
 	}
-	return wrapper.Res(http.StatusOK, errors.New(errors.ECOK, "OK"), rs)
+	return wrapper.Res(http.StatusOK, errors.New(errors.OK, "OK"), rs)
 }
 
 // Register handle api register new user
@@ -62,12 +62,12 @@ func (a *UserAPI) Register(c *gin.Context) wrapper.Response {
 	var params *schema.UserRegisterParams
 	if err := c.ShouldBindJSON(&params); err != nil {
 		logger.Error(err.Error())
-		return wrapper.Res(http.StatusBadRequest, errors.New(errors.ECInvalidArgument, err.Error()), nil)
+		return wrapper.Res(http.StatusBadRequest, errors.New(errors.InvalidArgument, err.Error()), nil)
 	}
 
 	validator := validation.New()
 	if err := validator.ValidateStruct(params); err != nil {
-		return wrapper.Res(http.StatusBadRequest, errors.New(errors.ECInvalidArgument, err.Error()), nil)
+		return wrapper.Res(http.StatusBadRequest, errors.New(errors.InvalidArgument, err.Error()), nil)
 	}
 
 	ctx := c.Request.Context()
@@ -77,5 +77,5 @@ func (a *UserAPI) Register(c *gin.Context) wrapper.Response {
 		return wrapper.Res(http.StatusBadRequest, err, nil)
 	}
 
-	return wrapper.Res(http.StatusOK, errors.New(errors.ECOK, "OK"), user.ToSchema())
+	return wrapper.Res(http.StatusOK, errors.New(errors.OK, "OK"), user.ToSchema())
 }

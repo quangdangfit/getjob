@@ -9,12 +9,12 @@ import (
 func Copy(dest interface{}, src interface{}) error {
 	data, err := json.Marshal(src)
 	if err != nil {
-		return errors.New(errors.ECMarshal, err.Error())
+		return errors.New(errors.Marshal, err.Error())
 	}
 
 	err = json.Unmarshal(data, dest)
 	if err != nil {
-		return errors.New(errors.ECMarshal, err.Error())
+		return errors.New(errors.Marshal, err.Error())
 	}
 
 	return nil

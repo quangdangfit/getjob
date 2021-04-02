@@ -10,14 +10,14 @@ func AddErrorContext(err error, field, message string) error {
 	context := errorContext{Field: field, Message: message}
 	if customErr, ok := err.(CustomError); ok {
 		return CustomError{
-			code:         customErr.code,
+			errorType:    customErr.errorType,
 			wrappedError: customErr.wrappedError,
 			context:      context,
 		}
 	}
 
 	return CustomError{
-		code:         ECUnknown,
+		errorType:    Unknown,
 		wrappedError: err,
 		context:      context,
 	}
@@ -38,10 +38,10 @@ func GetErrorContext(err error) map[string]string {
 }
 
 // GetCode returns the error type
-func GetCode(err error) ErrorCode {
+func GetType(err error) ErrorType {
 	if customErr, ok := err.(CustomError); ok {
-		return customErr.code
+		return customErr.errorType
 	}
 
-	return ECUnknown
+	return Unknown
 }

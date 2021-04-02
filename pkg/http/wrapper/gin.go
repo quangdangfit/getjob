@@ -34,9 +34,10 @@ func Wrap(fn GinHandlerFn) gin.HandlerFunc {
 func Translate(c *gin.Context, res Response) {
 	result := gin.H{}
 	if _, ok := res.Error.(errors.CustomError); ok {
-		status := int(errors.GetCode(res.Error))
-		result[StatusField] = status
-		result[MessageField] = errors.GetMsg(status)
+		errType := int(errors.GetType(res.Error))
+		result[StatusField] = errType
+		result[CodeField] = errors.GetCode(errType)
+		result[MessageField] = errors.GetMsg(errType)
 	}
 
 	// get data

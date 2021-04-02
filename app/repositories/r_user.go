@@ -29,14 +29,14 @@ func (r *UserRepository) GetByUsername(ctx context.Context, username string) (*m
 func (r *UserRepository) GetByEmail(ctx context.Context, email string) (*models.User, error) {
 	var user models.User
 	if err := r.db.GetInstance().Where("email = ?", email).First(&user).Error; err != nil {
-		return nil, errors.New(errors.ECMysqlRead, err.Error())
+		return nil, errors.New(errors.MysqlRead, err.Error())
 	}
 	return &user, nil
 }
 
 func (r *UserRepository) Create(ctx context.Context, user *models.User) error {
 	if err := r.db.GetInstance().Create(&user).Error; err != nil {
-		return errors.New(errors.ECMysqlCreate, err.Error())
+		return errors.New(errors.MysqlCreate, err.Error())
 	}
 	return nil
 }

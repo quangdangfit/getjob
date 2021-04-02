@@ -33,7 +33,7 @@ func (m *User) BeforeCreate(scope *gorm.Scope) error {
 
 	hashedPassword, err := utils.HashPassword([]byte(m.Password))
 	if err != nil {
-		return errors.New(errors.ECHashPasswordFail, err.Error())
+		return errors.New(errors.HashPasswordFail, err.Error())
 	}
 	m.Password = hashedPassword
 
@@ -53,7 +53,7 @@ func (m *User) ToSchema() *schema.User {
 func (m *User) CheckPassword(password string) (bool, error) {
 	err := bcrypt.CompareHashAndPassword([]byte(m.Password), []byte(password))
 	if err != nil {
-		return false, errors.New(errors.ECInvalidPassword, err.Error())
+		return false, errors.New(errors.InvalidPassword, err.Error())
 	}
 
 	return true, nil

@@ -37,7 +37,7 @@ func JWT(container *dig.Container) gin.HandlerFunc {
 		) {
 			token := GetToken(c)
 			if token == "" {
-				err := errors.New(errors.ECInvalidCredentials, "Unauthorized")
+				err := errors.New(errors.InvalidCredentials, "Unauthorized")
 				c.Header("WWW-Authenticate", "jwt realm=\"gin\"")
 				c.JSON(http.StatusUnauthorized, wrapper.Response{Error: err})
 				logger.Errorf("Unauthorized, token: %s : %s", token, err)
