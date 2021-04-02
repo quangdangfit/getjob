@@ -14,6 +14,7 @@ import (
 	"github.com/quangdangfit/getjob/pkg"
 )
 
+// BuildContainer return new dig container
 func BuildContainer() *dig.Container {
 	container := dig.New()
 
@@ -50,8 +51,9 @@ func BuildContainer() *dig.Container {
 	return container
 }
 
+// InitGinEngine initial gin-gonic engine
 func InitGinEngine(container *dig.Container) *gin.Engine {
-	app := gin.New()
+	app := gin.Default()
 	err := router.RegisterAPI(app, container)
 	if err != nil {
 		logger.Fatalf("Cannot init Gin Engine: %s", err)

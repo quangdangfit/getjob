@@ -11,4 +11,5 @@ import (
 type IUserService interface {
 	Login(ctx context.Context, params *schema.UserLoginParams) (*models.User, error)
 	Register(ctx context.Context, params *schema.UserRegisterParams) (*models.User, error)
+	GetByID(ctx context.Context, id string) (*models.User, error)
 }

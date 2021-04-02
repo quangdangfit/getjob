@@ -21,7 +21,7 @@ func NewUserService(repo interfaces.IUserRepository) interfaces.IUserService {
 	}
 }
 
-// Register handle logic register new user
+// Login handle logic register new user
 func (s *UserService) Login(ctx context.Context, params *schema.UserLoginParams) (*models.User, error) {
 	user, err := s.repo.GetByEmail(ctx, params.Email)
 	if err != nil {
@@ -45,6 +45,16 @@ func (s *UserService) Register(ctx context.Context, params *schema.UserRegisterP
 	}
 
 	err = s.repo.Create(ctx, user)
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}
+
+// GetByID handle logic get user by id
+func (s *UserService) GetByID(ctx context.Context, id string) (*models.User, error) {
+	user, err := s.repo.GetByID(ctx, id)
 	if err != nil {
 		return nil, err
 	}

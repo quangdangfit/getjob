@@ -15,6 +15,10 @@ import (
 	"github.com/quangdangfit/getjob/pkg/http/wrapper"
 )
 
+const (
+	UserIDContextKey = "id"
+)
+
 // UserAPI handle user api
 type UserAPI struct {
 	auth    jwt.IJWTAuth
@@ -42,8 +46,7 @@ func (a *UserAPI) Login(c *gin.Context) wrapper.Response {
 		return wrapper.Res(http.StatusBadRequest, errors.New(errors.InvalidArgument, err.Error()), nil)
 	}
 
-	ctx := c.Request.Context()
-	user, err := a.service.Login(ctx, params)
+	user, err := a.service.Login(c, params)
 	if err != nil {
 		logger.Error(err.Error())
 		return wrapper.Res(http.StatusBadRequest, err, nil)
@@ -70,8 +73,23 @@ func (a *UserAPI) Register(c *gin.Context) wrapper.Response {
 		return wrapper.Res(http.StatusBadRequest, errors.New(errors.InvalidArgument, err.Error()), nil)
 	}
 
-	ctx := c.Request.Context()
-	user, err := a.service.Register(ctx, params)
+	user, err := a.service.Register(c, params)
+	if err != nil {
+		logger.Error(err.Error())
+		return wrapper.Res(http.StatusBadRequest, err, nil)
+	}
+
+	return wrapper.Res(http.StatusOK, errors.New(errors.OK, "OK"), user.ToSchema())
+}
+
+// GetProfile handle api get personal profile
+func (a *UserAPI) GetProfile(c *gin.Context) wrapper.Response {
+	var id = c.GetString(UserIDContextKey)
+	if id == "" {
+		return wrapper.Res(http.StatusBadRequest, errors.New(errors.InvalidArgument, "id is required"), nil)
+	}
+
+	user, err := a.service.GetByID(c, id)
 	if err != nil {
 		logger.Error(err.Error())
 		return wrapper.Res(http.StatusBadRequest, err, nil)
