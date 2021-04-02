@@ -11,13 +11,20 @@ import (
 	"github.com/quangdangfit/getjob/app/repositories"
 	"github.com/quangdangfit/getjob/app/router"
 	"github.com/quangdangfit/getjob/app/services"
+	"github.com/quangdangfit/getjob/pkg"
 )
 
 func BuildContainer() *dig.Container {
 	container := dig.New()
 
+	// Inject packages
+	err := pkg.Inject(container)
+	if err != nil {
+		logger.Error("Failed to inject packages", err)
+	}
+
 	// Inject database
-	err := dbs.Inject(container)
+	err = dbs.Inject(container)
 	if err != nil {
 		logger.Error("Failed to inject database", err)
 	}

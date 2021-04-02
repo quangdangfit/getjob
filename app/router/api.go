@@ -17,6 +17,7 @@ func RegisterAPI(r *gin.Engine, container *dig.Container) error {
 		//--------------------------------API-----------------------------------
 		apiRoute := r.Group("/api/v1")
 		{
+			apiRoute.POST("/login", wrapper.Wrap(userAPI.Login))
 			apiRoute.POST("/register", wrapper.Wrap(userAPI.Register))
 		}
 		return nil

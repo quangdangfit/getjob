@@ -22,6 +22,21 @@ func NewUserService(repo interfaces.IUserRepository) interfaces.IUserService {
 }
 
 // Register handle logic register new user
+func (s *UserService) Login(ctx context.Context, params *schema.UserLoginParams) (*models.User, error) {
+	user, err := s.repo.GetByEmail(ctx, params.Email)
+	if err != nil {
+		return nil, err
+	}
+
+	ok, err := user.CheckPassword(params.Password)
+	if !ok {
+		return nil, err
+	}
+
+	return user, nil
+}
+
+// Register handle logic register new user
 func (s *UserService) Register(ctx context.Context, params *schema.UserRegisterParams) (*models.User, error) {
 	var user *models.User
 	err := utils.Copy(&user, &params)

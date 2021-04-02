@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/jinzhu/gorm"
+	"golang.org/x/crypto/bcrypt"
 
 	"github.com/quangdangfit/getjob/app/schema"
 	"github.com/quangdangfit/getjob/pkg/errors"
@@ -47,4 +48,13 @@ func (m *User) ToSchema() *schema.User {
 	}
 
 	return scUser
+}
+
+func (m *User) CheckPassword(password string) (bool, error) {
+	err := bcrypt.CompareHashAndPassword([]byte(m.Password), []byte(password))
+	if err != nil {
+		return false, errors.New(errors.ECInvalidPassword, err.Error())
+	}
+
+	return true, nil
 }

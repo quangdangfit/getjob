@@ -24,6 +24,7 @@ type User struct {
 // Request
 // =============================================================================
 
+// UserRegisterParams schema
 type UserRegisterParams struct {
 	Email              string `json:"email" validate:"required,email"`
 	Password           string `json:"password" validate:"required,password"`
@@ -38,5 +39,17 @@ type UserRegisterParams struct {
 	Description        string `json:"description"`
 }
 
+// UserLoginParams schema
+type UserLoginParams struct {
+	Email    string `json:"email" validate:"required,email"`
+	Password string `json:"password" validate:"required,password"`
+}
+
 // Response
 //==============================================================================
+
+// UserLoginRes schema
+type UserLoginRes struct {
+	Token       string `json:"token"`
+	ExpiredTime string `json:"expired_time"`
+}
