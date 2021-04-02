@@ -12,6 +12,9 @@ func Inject(container *dig.Container) error {
 	if err := container.Provide(NewCompanyService); err != nil {
 		return err
 	}
+	if err := container.Provide(NewExperienceService); err != nil {
+		return err
+	}
 
 	return nil
 }

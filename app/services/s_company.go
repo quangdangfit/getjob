@@ -31,7 +31,7 @@ func (s *CompanyService) GetByID(ctx context.Context, id string) (*models.Compan
 	return company, nil
 }
 
-// GetByID handle logic get company by id
+// GetByID handle logic create new company
 func (s *CompanyService) Create(ctx context.Context, params *schema.CompanyCreateParams) (*models.Company, error) {
 	var company *models.Company
 	err := utils.Copy(&company, &params)
