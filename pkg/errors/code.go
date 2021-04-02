@@ -123,22 +123,22 @@ const (
 	// ECMongoDelete : mongodb delete model error
 	ECMongoDelete
 
-	// ECPostgresqlConnection : mysql connection error
-	ECPostgresqlConnection
-	// ECPostgresqlDBEmpty : mysql db is empty
-	ECPostgresqlDBEmpty
-	// ECPostgresqlDBAutoMigrate : mysql db auto migrate error
-	ECPostgresqlDBAutoMigrate
-	// ECPostgresqlCreate : mysql create model error
-	ECPostgresqlCreate
-	// ECPostgresqlRead : mysql read model error
-	ECPostgresqlRead
-	// ECPostgresqlUpdate : mysql update model error
-	ECPostgresqlUpdate
-	// ECPostgresqlDelete : mysql delete model error
-	ECPostgresqlDelete
-	// ECPostgresqlAfterSave : mysql after_save hook model error
-	ECPostgresqlAfterSave
+	// ECMysqlConnection : mysql connection error
+	ECMysqlConnection
+	// ECMysqlDBEmpty : mysql db is empty
+	ECMysqlDBEmpty
+	// ECMysqlDBAutoMigrate : mysql db auto migrate error
+	ECMysqlDBAutoMigrate
+	// ECMysqlCreate : mysql create model error
+	ECMysqlCreate
+	// ECMysqlRead : mysql read model error
+	ECMysqlRead
+	// ECMysqlUpdate : mysql update model error
+	ECMysqlUpdate
+	// ECMysqlDelete : mysql delete model error
+	ECMysqlDelete
+	// ECMysqlAfterSave : mysql after_save hook model error
+	ECMysqlAfterSave
 
 	// ECSolrConnection : solr connection error
 	ECSolrConnection
