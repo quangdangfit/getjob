@@ -7,6 +7,7 @@ import (
 	"github.com/quangdangfit/gocommon/logger"
 
 	"github.com/quangdangfit/getjob/app/api"
+	"github.com/quangdangfit/getjob/app/middleware"
 	"github.com/quangdangfit/getjob/pkg/http/wrapper"
 )
 
@@ -20,6 +21,9 @@ func RegisterAPI(r *gin.Engine, container *dig.Container) error {
 			apiRoute.POST("/login", wrapper.Wrap(userAPI.Login))
 			apiRoute.POST("/register", wrapper.Wrap(userAPI.Register))
 		}
+		jwtMid := middleware.JWT(container)
+		apiRoute.GET("/profile", jwtMid, wrapper.Wrap(userAPI.GetProfile))
+
 		return nil
 	})
 

@@ -19,7 +19,11 @@ func NewUserRepository(db interfaces.IDatabase) interfaces.IUserRepository {
 }
 
 func (r *UserRepository) GetByID(ctx context.Context, id string) (*models.User, error) {
-	return nil, nil
+	var user models.User
+	if err := r.db.GetInstance().Where("id = ?", id).First(&user).Error; err != nil {
+		return nil, errors.New(errors.MysqlRead, err.Error())
+	}
+	return &user, nil
 }
 
 func (r *UserRepository) GetByUsername(ctx context.Context, username string) (*models.User, error) {
