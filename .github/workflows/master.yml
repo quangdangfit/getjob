@@ -14,18 +14,16 @@ jobs:
       GIN_MODE: release
       DATABASE__HOST: 127.0.0.1
       DATABASE__NAME: getjob
-      DATABASE__PORT: 5432
-      DATABASE__ENV: native
-      DATABASE__USER: postgres
+      DATABASE__PORT: 3306
+      DATABASE__USER: root
       DATABASE__PASSWORD: 1234
-      DATABASE__SSLMODE: disable
 
     services:
-      postgres:
-        image: postgres:latest
+      mysql:
+        image: mysql:latest
         env:
-          POSTGRES_DB: getjob
-          POSTGRES_PASSWORD: 1234
+          MYSQL_DATABASE: getjob
+          MYSQL_ROOT_PASSWORD: 1234
         ports:
           - 5432:5432
 

@@ -6,9 +6,9 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DATABASE__HOST: "postgres"
+      DATABASE__HOST: "mysql"
     depends_on:
-      - postgres
+      - mysql
       - redis
 
   redis:
@@ -18,14 +18,14 @@ services:
     volumes:
       - "/.storage/redis_data:/data"
 
-  postgres:
+  mysql:
     restart: always
-    image: "postgres:latest"
-    environment:
-      DATABASE_USER: postgres
-      POSTGRES_PASSWORD: 1234
+    image: "mysql:latest"
     ports:
-      - "5432:5432"
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
     volumes:
-      - "./scripts/init.d:/docker-entrypoint-initdb.d"
-      - "/.storage/postgres-data:/var/lib/postgresql/data"
+      - "./storage/mysql_data/data:/var/lib/mysql"
+      - "./scripts/initdb.d:/docker-entrypoint-initdb.d"
+
