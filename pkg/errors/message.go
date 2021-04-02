@@ -11,6 +11,7 @@ var MsgMap = map[ErrorCode]string{
 	ECEmailNotExists:                "Email does not exists",
 	ECEmailAlreadyExists:            "Email already exists",
 	ECPasswordMismatch:              "Password and confirm password must match",
+	ECInvalidCredentials:            "invalid credentials",
 	ECUpdateUser:                    "Cannot update user profile",
 	ECChangePasswordSame:            "New password and old password are the same",
 	ECChangePasswordOldPwdNotSame:   "Old password doesn't match",

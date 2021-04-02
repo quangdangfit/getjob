@@ -40,6 +40,8 @@ const (
 	ECEmailAlreadyExists
 	// ECPasswordMismatch : password and confirm password must match
 	ECPasswordMismatch
+	// ECInvalidCredentials : invalid credentials
+	ECInvalidCredentials
 	// ECUpdateUser : cannot update user profile
 	ECUpdateUser
 	// ECChangePasswordSame : new password and old password are the same
