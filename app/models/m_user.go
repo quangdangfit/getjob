@@ -15,6 +15,7 @@ type User struct {
 	Password           string `json:"password" gorm:"not null;index"`
 	Title              string `json:"title"`
 	CompanyID          string `json:"company_id" gorm:"index"`
+	Company            Company
 	AvatarURL          string `json:"avatar_url"`
 	BackgroundPhotoURL string `json:"background_photo_url"`
 	CV                 string `json:"cv"`
