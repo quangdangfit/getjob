@@ -4,7 +4,10 @@ import (
 	"go.uber.org/dig"
 )
 
+// Inject database
 func Inject(container *dig.Container) error {
-	_ = container.Provide(NewDatabase)
+	if err := container.Provide(NewDatabase); err != nil {
+		return err
+	}
 	return nil
 }

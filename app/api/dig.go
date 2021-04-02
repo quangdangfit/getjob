@@ -4,7 +4,10 @@ import (
 	"go.uber.org/dig"
 )
 
+// Inject api
 func Inject(container *dig.Container) error {
-	_ = container.Provide(NewUserAPI)
+	if err := container.Provide(NewUserAPI); err != nil {
+		return err
+	}
 	return nil
 }

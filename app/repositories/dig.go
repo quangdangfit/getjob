@@ -4,7 +4,10 @@ import (
 	"go.uber.org/dig"
 )
 
+// Inject repositories
 func Inject(container *dig.Container) error {
-	_ = container.Provide(NewUserRepository)
+	if err := container.Provide(NewUserRepository); err != nil {
+		return err
+	}
 	return nil
 }
