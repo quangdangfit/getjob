@@ -9,6 +9,7 @@ import (
 	"github.com/quangdangfit/getjob/pkg/utils"
 )
 
+// Experience model
 type Experience struct {
 	Model       `json:",inline"`
 	UserID      string    `json:"email" gorm:"unique;not null;index"`
@@ -19,6 +20,7 @@ type Experience struct {
 	Description string    `json:"description"`
 }
 
+// BeforeCreate handle before create to database
 func (e *Experience) BeforeCreate(scope *gorm.Scope) error {
 	err := e.Model.BeforeCreate(scope)
 	if err != nil {
@@ -27,11 +29,25 @@ func (e *Experience) BeforeCreate(scope *gorm.Scope) error {
 	return nil
 }
 
+// ToSchema convert model to schema
 func (e *Experience) ToSchema() *schema.Experience {
 	var scExperience *schema.Experience
 	err := utils.Copy(&scExperience, &e)
 	if err != nil {
 		return nil
+	}
+
+	return scExperience
+}
+
+// Experiences type
+type Experiences []*Experience
+
+// ToSchema convert model to schema
+func (e Experiences) ToSchema() []*schema.Experience {
+	scExperience := make([]*schema.Experience, len(e))
+	for i, ex := range e {
+		scExperience[i] = ex.ToSchema()
 	}
 
 	return scExperience
