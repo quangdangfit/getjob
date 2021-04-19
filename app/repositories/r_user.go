@@ -44,3 +44,10 @@ func (r *UserRepository) Create(ctx context.Context, user *models.User) error {
 	}
 	return nil
 }
+
+func (r *UserRepository) Update(ctx context.Context, user *models.User) error {
+	if err := r.db.GetInstance().Save(&user).Error; err != nil {
+		return errors.New(errors.MysqlCreate, err.Error())
+	}
+	return nil
+}

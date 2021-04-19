@@ -15,6 +15,7 @@ func RegisterAPI(r *gin.Engine, container *dig.Container) error {
 	err := container.Invoke(func(
 		userAPI *api.UserAPI,
 		companyAPI *api.CompanyAPI,
+		experienceAPI *api.ExperienceAPI,
 	) error {
 		jwtMid := middleware.JWT(container)
 		//-------------------------------Public API-----------------------------
@@ -27,8 +28,10 @@ func RegisterAPI(r *gin.Engine, container *dig.Container) error {
 		//-------------------------------Private API----------------------------
 		private := r.Group("/api/v1", jwtMid)
 		{
-			private.GET("/profile", jwtMid, wrapper.Wrap(userAPI.GetProfile))
-			private.POST("/companies", jwtMid, wrapper.Wrap(companyAPI.Create))
+			private.GET("/profile", wrapper.Wrap(userAPI.GetProfile))
+			private.POST("/companies", wrapper.Wrap(companyAPI.Create))
+
+			private.POST("/experiences", wrapper.Wrap(experienceAPI.Create))
 		}
 
 		//-------------------------------Internal API----------------------------

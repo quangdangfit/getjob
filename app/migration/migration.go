@@ -14,9 +14,13 @@ func Migrate(container *dig.Container) error {
 	) error {
 		User := models.User{}
 		Company := models.Company{}
+		Experience := models.Experience{}
 
-		db.GetInstance().AutoMigrate(&User, &Company)
-		//db.GetInstance().Model(&User).AddForeignKey("role_id", "roles(id)", "RESTRICT", "RESTRICT")
+		db.GetInstance().AutoMigrate(&User, &Company, &Experience)
+
+		// Experience
+		db.GetInstance().Model(&Experience).AddForeignKey("user_id", "users(id)", "CASCADE", "CASCADE")
+		db.GetInstance().Model(&Experience).AddForeignKey("company_id", "companies(id)", "CASCADE", "CASCADE")
 
 		return nil
 	})

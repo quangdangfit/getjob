@@ -38,18 +38,18 @@ func (a *UserAPI) Login(c *gin.Context) wrapper.Response {
 	var params *schema.UserLoginParams
 	if err := c.ShouldBindJSON(&params); err != nil {
 		logger.Error(err.Error())
-		return wrapper.Res(http.StatusBadRequest, errors.New(errors.InvalidArgument, err.Error()), nil)
+		return wrapper.Res(http.StatusUnauthorized, errors.New(errors.InvalidArgument, err.Error()), nil)
 	}
 
 	validator := validation.New()
 	if err := validator.ValidateStruct(params); err != nil {
-		return wrapper.Res(http.StatusBadRequest, errors.New(errors.InvalidArgument, err.Error()), nil)
+		return wrapper.Res(http.StatusUnauthorized, errors.New(errors.InvalidArgument, err.Error()), nil)
 	}
 
 	user, err := a.service.Login(c, params)
 	if err != nil {
 		logger.Error(err.Error())
-		return wrapper.Res(http.StatusBadRequest, err, nil)
+		return wrapper.Res(http.StatusUnauthorized, err, nil)
 	}
 
 	token, expiredTime := a.auth.GenerateToken(user.ID)
