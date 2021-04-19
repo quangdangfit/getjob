@@ -20,7 +20,7 @@ type Experience struct {
 type ExperienceCreateParams struct {
 	CompanyID   string `json:"company_id"`
 	Title       string `json:"title"`
-	StartTime   string `json:"start_time"`
-	EndTime     string `json:"end_time"`
+	StartTime   string `json:"start_time" validate:"datetime=2006-01-02"`
+	EndTime     string `json:"end_time" validate:"datetime=2006-01-02"`
 	Description string `json:"description"`
 }

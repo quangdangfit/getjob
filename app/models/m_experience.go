@@ -1,8 +1,6 @@
 package models
 
 import (
-	"time"
-
 	"github.com/jinzhu/gorm"
 
 	"github.com/quangdangfit/getjob/app/schema"
@@ -12,14 +10,14 @@ import (
 // Experience model
 type Experience struct {
 	Model       `json:",inline"`
-	UserID      string `json:"email" gorm:"unique;not null;index"`
+	UserID      string `json:"user_idr" gorm:"not null;index"`
 	User        User
 	CompanyID   string `json:"company_id" gorm:"index"`
 	Company     Company
-	Title       string    `json:"title"`
-	StartTime   time.Time `json:"start_time"`
-	EndTime     time.Time `json:"end_time"`
-	Description string    `json:"description"`
+	Title       string `json:"title"`
+	StartTime   string `json:"start_time"`
+	EndTime     string `json:"end_time"`
+	Description string `json:"description"`
 }
 
 // BeforeCreate handle before create to database

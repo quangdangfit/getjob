@@ -10,5 +10,5 @@ import (
 type IExperienceService interface {
 	GetByID(ctx context.Context, id string) (*models.Experience, error)
 	ListByUserID(ctx context.Context, userID string) (*models.Experiences, error)
-	Create(ctx context.Context, params *schema.ExperienceCreateParams) (*models.Experience, error)
+	Create(ctx context.Context, userID string, params *schema.ExperienceCreateParams) (*models.Experience, error)
 }
